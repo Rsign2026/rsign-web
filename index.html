@@ -3,14 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rsign.it</title>
+    <title>Assistenza Tecnica Computer | Apple, Windows & Workstation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; display: flex; 
-                     justify-content: center; align-items: center; background: #000; }
-        img { max-width: 90%; max-height: 90vh; }
+        :root {
+            --primary: #0f172a;
+            --accent-blue: #2563eb;
+            --accent-green: #16a34a;
+            --accent-red: #dc2626;
+            --accent-yellow: #ca8a04;
+            --accent-purple: #9333ea;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+        }
+
+        .btn-contact {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 1.5rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .platforms i {
+            margin-right: 6px;
+        }
+
+        /* Services Grid */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+
+        /* Card Colors */
+        .card.blue::before { background-color: var(--accent-blue); }
+        .card.green::before { background-color: var(--accent-green); }
+        .card.red::before { background-color: var(--accent-red); }
+        .card.yellow::before { background-color: var(--accent-yellow); }
+        .card.purple::before { background-color: var(--accent-purple); }
+        .card.dark::before { background-color: var(--primary); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .blue .card-icon { background: #dbeafe; color: var(--accent-blue); }
+        .green .card-icon { background: #dcfce7; color: var(--accent-green); }
+        .red .card-icon { background: #fee2e2; color: var(--accent-red); }
+        .yellow .card-icon { background: #fef9c3; color: var(--accent-yellow); }
+        .purple .card-icon { background: #f3e8ff; color: var(--accent-purple); }
+        .dark .card-icon { background: #f1f5f9; color: var(--primary); }
+
+        .card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .card p.desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .card ul li::before {
+            content: "•";
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .blue ul li::before { color: var(--accent-blue); }
+        .green ul li::before { color: var(--accent-green); }
+        .red ul li::before { color: var(--accent-red); }
+        .yellow ul li::before { color: var(--accent-yellow); }
+        .purple ul li::before { color: var(--accent-purple); }
+        .dark ul li::before { color: var(--primary); }
+
+        /* Banner Info */
+        .info-banner {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+        }
+
+        .info-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-banner p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #020617;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-contacts a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-contacts a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .platforms { flex-direction: column; gap: 0.5rem; }
+            .footer-contacts { flex-direction: column; gap: 1rem; }
+        }
     </style>
 </head>
 <body>
-    <img src="valore.png" alt="La Svalutazione del Valore">
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-microchip"></i>
+            <span>Riccardo</span> Assistenza
+        </div>
+        <a href="#contatti" class="btn-contact">Contattaci Ora</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Il Tuo Partner Affidabile per Assistenza e Riparazione Computer</h1>
+        <p>Servizi certificati e professionali per Apple, Windows, Laptop e Workstation.</p>
+        <div class="platforms">
+            <span><i class="fa-brands fa-apple"></i> macOS & Apple Hardware</span>
+            <span><i class="fa-brands fa-windows"></i> Windows PC & Server</span>
+            <span><i class="fa-solid fa-laptop"></i> Workstation & Portable</span>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <div class="container">
+        <div class="services-grid">
+
+            <!-- Diagnosi e Riparazione -->
+            <div class="card blue">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <h3>Diagnosi & Riparazione</h3>
+                </div>
+                <p class="desc">Risoluzione accurata di problemi hardware e software.</p>
+                <ul>
+                    <li>Check-up completo del sistema</li>
+                    <li>Test approfondito dei componenti</li>
+                    <li>Sostituzione parti guaste</li>
+                </ul>
+            </div>
+
+            <!-- Manutenzione Preventiva -->
+            <div class="card green">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Manutenzione Preventiva</h3>
+                </div>
+                <p class="desc">Pianificazione e cura per evitare blocchi futuri.</p>
+                <ul>
+                    <li>Pulizia interna e pasta termica</li>
+                    <li>Aggiornamento driver e firmware</li>
+                    <li>Controllo e ottimizzazione prestazioni</li>
+                </ul>
+            </div>
+
+            <!-- Sicurezza e Malware -->
+            <div class="card red">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-bug-slash"></i></div>
+                    <h3>Sicurezza & Virus</h3>
+                </div>
+                <p class="desc">Protezione totale da minacce informatiche.</p>
+                <ul>
+                    <li>Rimozione malware e ransomware</li>
+                    <li>Installazione antivirus avanzato</li>
+                    <li>Configurazione firewall e protezione</li>
+                </ul>
+            </div>
+
+            <!-- Recupero Dati -->
+            <div class="card yellow">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>Recupero Dati</h3>
+                </div>
+                <p class="desc">Salvataggio e ripristino delle tue informazioni.</p>
+                <ul>
+                    <li>Recupero da dischi danneggiati</li>
+                    <li>Ripristino da sistemi formattati</li>
+                    <li>Recupero cancellazioni accidentali</li>
+                </ul>
+            </div>
+
+            <!-- Upgrade Hardware -->
+            <div class="card purple">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-memory"></i></div>
+                    <h3>Upgrade & Hard-Disk</h3>
+                </div>
+                <p class="desc">Potenziamento e velocizzazione Mac e PC.</p>
+                <ul>
+                    <li>Installazione SSD ad alte prestazioni</li>
+                    <li>Espansione memoria RAM</li>
+                    <li>Configurazione nuovi computer</li>
+                </ul>
+            </div>
+
+            <!-- Assistenza Software -->
+            <div class="card dark">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>Assistenza Software & OS</h3>
+                </div>
+                <p class="desc">Sistemi operativi e gestione programmi.</p>
+                <ul>
+                    <li>Installazione Windows / macOS / Linux</li>
+                    <li>Risoluzione crash e errori app</li>
+                    <li>Formattazione e ripristino pulito</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Banner Chi Siamo -->
+        <div class="info-banner">
+            <h2>Chi Siamo</h2>
+            <p>Massima expertise per PC, Laptop e Workstation. Specializzati in diagnosi hardware, ottimizzazione software e soluzioni dedicate per ambienti Apple e Windows.</p>
+        </div>
+    </div>
+
+    <!-- Footer / Contatti -->
+    <footer id="contatti">
+        <div class="footer-contacts">
+            <a href="tel:+393000000000"><i class="fa-solid fa-phone"></i> Telefonaci</a>
+            <a href="mailto:info@esempio.it"><i class="fa-solid fa-envelope"></i> Inviaci un'Email</a>
+            <a href="#"><i class="fa-solid fa-location-dot"></i> Palermo</a>
+        </div>
+        <p>&copy; 2026 Assistenza Tecnica Computer. Tutti i diritti riservati.</p>
+    </footer>
+
 </body>
 </html>
